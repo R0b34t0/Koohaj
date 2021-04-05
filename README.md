@@ -4,9 +4,6 @@ Kratki opis: Svrha eKooharice je omogućiti korisnicima uvid u recepte za razna 
 
 Za koga (što) je aplikacija napravljena: Aplikacija je namjenjena za korištenje svima koji trebaju pomoć u vezi kuhanja.
 
-<<<<<<< HEAD
 
 Test ako commit radi
-=======
 Testiramo da li sync kod kolege radi
->>>>>>> 8343ead36ac86d69e11738a7c6e1c41152092c12
