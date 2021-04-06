@@ -1,9 +1,19 @@
-Naslov: Koohaj!
+# koohaj
 
-Kratki opis: Svrha eKooharice je omogućiti korisnicima uvid u recepte za razna jela te potaknuti na kuhanje zdravijih i raznovrsnijih obroka. Projekt nastaje kao dnevna potreba za kuhanjem hrane i čestim nedoumicama što kuhati sutra!?
+## Project setup
+```
+npm install
+```
 
-Za koga (što) je aplikacija napravljena: Aplikacija je namjenjena za korištenje svima koji trebaju pomoć u vezi kuhanja.
+### Compiles and hot-reloads for development
+```
+npm run serve
+```
 
+### Compiles and minifies for production
+```
+npm run build
+```
 
-Test ako commit radi
-Testiramo da li sync kod kolege radi
+### Customize configuration
+See [Configuration Reference](https://cli.vuejs.org/config/).
