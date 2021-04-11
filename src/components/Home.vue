@@ -19,7 +19,7 @@ export default {
   },
     data() {
         return {
-            searchValue:'', //dodana vrijednost da se mora stisnut search da se dobije org vr 
+            searchValue:'', //dodana vrijednost da se mora stisnut search da se dobije org vrijednost 
             searchVal: '', // ovo je vrijednost u modelu
             searched: false,
             isClicked: false,

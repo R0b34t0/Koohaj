@@ -7,7 +7,8 @@
         <div v-if="checkValues(test[1])" v-on="getImage(test[1].imeSlike)"> 
           <!--  -->
         <p :class="[isClicked ? 'clickedTitle' : '']" >{{test[1].imeJela}}</p>
-        <img :class="[isClicked ? 'clicked' : '']" @click="openMeal(index)" :src="imgLink" class="images" > 
+        <img :class="[isClicked ? 'clicked' : '']" @click="openMeal(index)" :src="test[1].link" class="images" > 
+        <!-- imgLink -->
         <div v-if="isClicked" :class="[isClicked ? 'clickedText' : '']" v-for="recipe in test[1].sastojci" :key="recipe">
           {{recipe}}
           </div>
@@ -65,7 +66,7 @@ export default {
     },
     openMeal: function(arrPosition) {
       this.mealsDb = [this.mealsDb[arrPosition]]
-      toggleClass() // prebaceno iz poziva u buttonu
+      this.toggleClass() // prebaceno iz poziva u buttonu
     },
     toggleClass: function() {
       this.isClicked = true;

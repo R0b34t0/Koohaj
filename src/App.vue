@@ -7,6 +7,7 @@
   <div id="nav">
     <Navbar />
     <Home />
+    <!-- <Unos /> -->
   </div>
 
 </template>
@@ -16,11 +17,12 @@
 
 import Navbar from './views/Navbar'
 import Home from './components/Home'
-
+import Unos from './components/Unos'
 export default {
     components:{
     Navbar,
     Home,
+    Unos, // izbrisat
   },
     
 }
