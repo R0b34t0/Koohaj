@@ -1,10 +1,11 @@
 <template>
-<button @click="checkArray()">afawg
-</button>
   <ul>
-    <div class="listStyle" v-if="this.searchVal" >
+    <div class="listStyle" v-if="this.searchVal">
+      <!-- potencijalno se moze izbaciti searchval -->
+      <!-- v-on="checkValues()" -->
       <li v-for="(test,index) in this.mealsDb" :key="test[0]">
-        <div v-if="checkValues(test[1])" v-on="getImage(test[1].imeSlike)"> 
+        <div v-on="getImage(test[1].imeSlike)"> 
+          <!-- v-if="checkValues(test[1])" -->
           <!--  -->
         <p :class="[isClicked ? 'clickedTitle' : '']" >{{test[1].imeJela}}</p>
         <img :class="[isClicked ? 'clicked' : '']" @click="openMeal(index)" :src="test[1].link" class="images" > 
@@ -42,17 +43,14 @@ export default {
         ['pizza1',['a','b','c'],'https://www.themealdb.com/images/media/meals/x0lk931587671540.jpg'],
         ['pizza1',['a','b','c'],'https://www.themealdb.com/images/media/meals/x0lk931587671540.jpg'],
       ],
-      mealsDb: this.mealsDb,
+      mealsDb: this.mealsDb, 
+      // provjeriti ovu inicijalizaciju
       imgLink:'',
     }
   },
   methods: {
-    checkValues: function(firstValue){
-      // console.log(firstValue.imeJela);
-    return (this.searchVal === '' ? false : firstValue.imeJela.includes(this.searchVal))
-    // return true
-    },
     getImage: async function(imageName){
+      // this.isClicked = false
       // Create a reference to the file we want to download
       // console.log(imageName);
       var storageRef = storage.ref()
@@ -62,10 +60,12 @@ export default {
         console.log(error);
       })
       
-      console.log(this.imgLink);
+      // console.log(this.imgLink);
     },
     openMeal: function(arrPosition) {
-      this.mealsDb = [this.mealsDb[arrPosition]]
+      let tempVar = this.mealsDb[arrPosition]
+      this.mealsDb.length = 0
+      this.mealsDb.push(tempVar)
       this.toggleClass() // prebaceno iz poziva u buttonu
     },
     toggleClass: function() {
@@ -74,24 +74,22 @@ export default {
     setTitle: function(className) {
       // [isClicked ? 'clickedTitle' : '']
       // if(this.isClicked) 
-    },
-    
-    checkArray: function(val) {
-      //izbrisat ovo
-      // console.log(this.mealsDb[1][1]);
-      console.log(this.mealsDb)
     }
     
+  },
+  watch: {
+    mealsDb: function(){
+      this.isClicked = false
+    }
   },
   beforeUpdate() {    
     // console.log(this.mealsDb[1][1].includes(this.searchVal));
     // console.log(this.mealsDb[0]);
     let tempArr = []
-
     tempArr = this.mealsDb.filter(value => value[1].imeJela.includes(this.searchVal))
-    console.log(tempArr);
-
-    this.mealsDb = tempArr
+    // console.log(tempArr);
+    this.mealsDb.length = 0
+    this.mealsDb.push.apply(this.mealsDb, tempArr)
     // console.log(value[1])
   }
   

@@ -52,7 +52,7 @@ export default {
 
   },
   loadImg(imgName){
-        var uploadTask = storage.ref().child(imgName).put(this.files)
+        var uploadTask = storage.ref().child(imgName+'.jpg').put(this.files)
 
         uploadTask.on('state_changed', 
         (snapshot) => {}, 

@@ -2,9 +2,10 @@
     <div id="home">
         <div id="search">
             <input v-model="searchVal" type="text" id="searchBar" placeholder="Unesite jelo za pretragu">
+            <!-- probaj dodat lazy za v-model i vidi sto ce se dogodit -->
             <button @click="setValue(),loadDb()" id="btnSearch"><img src="../assets/search.png" id="ikona"></button>
         </div>
-        <Meals v-if="searched" :searchVal="searchValue" :mealsDb="mealsDb" :isClicked="isClicked"/>
+        <Meals v-if="searched" :searchVal="searchValue" :mealsDb="mealsDb" :isClicked="false"/>
     </div>
 </template>
 
