@@ -6,29 +6,36 @@
             <button @click="setValue(),loadDb()" id="btnSearch"><img src="../assets/search.png" id="ikona"></button>
         </div>
         <Meals v-if="searched" :searchVal="searchValue" :mealsDb="mealsDb" :isClicked="false"/>
+         <h2 v-if="this.loginButton" @click="prijava()" class="prijavaBtn">Prijava</h2>
+        <Login v-if="this.clicked" v-on:loginSucc="loginSuccessful"/>
+        
     </div>
 </template>
 
 <script>
 import Meals from '../views/Meals'
 import {jela} from '../../firebase'
+import Login from '../views/Login'
 
 
 export default {
-    components:{
-    Meals,
+    //name: 'Home',
+    components: {
+        Meals,
+        Login,
   },
-    data() {
-        return {
-            searchValue:'', //dodana vrijednost da se mora stisnut search da se dobije org vrijednost 
-            searchVal: '', // ovo je vrijednost u modelu
-            searched: false,
-            isClicked: false,
-            mealsDb:[], //vrijednost iz db 
-            
-        }
-    },
+  
+
     methods: {
+        
+        prijava(){
+        this.clicked = true;
+        console.log("prijava radi");
+        },
+        loginSuccessful(value){
+            this.clicked = value;
+            this.loginButton = false;
+        },
         setValue: function() {
             this.searchValue = this.searchVal
             this.searched = true //otkriva search vrijednosti
@@ -45,10 +52,26 @@ export default {
         // }
 
       })
+      
         // console.log(this.mealsDb)
     })
+        },
+     
+        
+    },
+        data() {
+        return {
+            searchValue:'', //dodana vrijednost da se mora stisnut search da se dobije org vrijednost 
+            searchVal: '', // ovo je vrijednost u modelu
+            searched: false,
+            isClicked: false,
+            mealsDb:[], //vrijednost iz db 
+            clicked: false,
+            loginButton: true,
+            
         }
     },
+    
 }
 </script>
 
@@ -62,9 +85,10 @@ export default {
         height: 20px;
         border: 1px solid #979797;
     }
-    #btnSearch:focus{
-        /* outline: none; */
+    /*  #btnSearch:focus{
+         outline: none; 
     }
+    */
     #btnSearch {
         transform: translate(-30%,7%);
         border-radius: 0 10px 10px 0;
@@ -78,4 +102,12 @@ export default {
         display: flex;
         align-items: center;
     }
+    .prijavaBtn{
+    color: #ffffff;
+    position: absolute;
+    top: 0;
+    cursor: pointer;
+    left: 90%;
+    right: 10%;
+  }
 </style>

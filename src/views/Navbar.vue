@@ -5,7 +5,6 @@
     </div>
 </template>
 
-
 <style>
     #heading h1 {
         color: white;
