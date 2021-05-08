@@ -1,23 +1,4 @@
 <template>
-<<<<<<< HEAD
-  
-  <ul>
-    <div class="listStyle" v-if="this.searchVal" >
-      <li v-for="(test,index) in this.meals" :key="test[0]">
-        <!-- {{test[0]}} : {{test[1]}} -->
-        <!-- <img :src="'{{test[2]}}'"> -->
-        <!-- <img src="./assets/pizza.jpg" alt=""> -->
-        <div v-if="checkValues(test[0])">
-          <p :class="[isClicked ? 'clickedTitle' : '']" >{{test[0]}}</p>
-        <img :class="[isClicked ? 'clicked' : '']" @click="openMeal(index),toggleClass()" v-bind:src="test[2]" class="images" > 
-        <!-- @mouseover="hover = true" @mouseleave="hover=false"  -->
-        <div v-if="isClicked" :class="[isClicked ? 'clickedText' : '']" v-for="recipe in test[1]" :key="recipe">{{recipe}}</div>
-        </div>
-        <!-- <div v-for="value in test[1]" :key="value" >
-          {{value}}   
-          izbaceno trenutno, razmisljam da bude click da otkrije tekst
-        </div> -->
-=======
   <ul>
     <div class="listStyle" v-if="this.searchVal">
       <!-- potencijalno se moze izbaciti searchval -->
@@ -33,7 +14,6 @@
           {{recipe}}
           </div>
         </div>
->>>>>>> development
         </li>
     </div>
   </ul>
@@ -41,61 +21,6 @@
 </template>
 
 <script>
-<<<<<<< HEAD
-import {jela} from '../../firebase'
-
-
-export default {
-    props: [
-      'searchVal',
-    ],
-    data() {
-    return {
-      hover:false,
-      isClicked: false,
-      meals: [
-        ['pizza',["voda (150ml)", "secer (1 zlicica)", "kvasac (15g)", "passata (80g)", 
-                "mozzarella (70g)"],'https://www.themealdb.com/images/media/meals/x0lk931587671540.jpg'],
-        ['broccoli',['sol','papar','persin'],'https://www.themealdb.com/images/media/meals/tvvxpv1511191952.jpg'],
-        ['pizza1',['a','b','c'],'https://www.themealdb.com/images/media/meals/x0lk931587671540.jpg'],
-        ['pizza1',['a','b','c'],'https://www.themealdb.com/images/media/meals/x0lk931587671540.jpg'],
-      ],
-      img1: '../assets/pizza.jpg'
-    }
-  },
-  methods: {
-    checkValues: function(firstValue){
-    return (this.searchVal === '' ? false : firstValue.includes(this.searchVal))
-    },
-    openMeal: function(arrPosition) {
-      this.meals = [this.meals[arrPosition]]
-    },
-    toggleClass: function() {
-      this.isClicked = true;
-    }
-    
-  },
-  mounted() {
-    //   jela.get().then((querySnapshot)=>{
-    //   querySnapshot.forEach((doc)=>{
-        
-        //Komentirano dok ne osposobimo pull svih potrebnih podataka
-    //     // console.log(doc.data());
-    //     // var tempArr = 
-        
-    //     // tempArr.push([doc.id, doc.data()])
-    //     // console.log(tempArr);
-    //     // console.log(typeof doc.data());
-    //     // if(Array.isArray(tempArr)){
-    //       this.meals.push([
-    //         doc.id,
-    //         doc.data()])
-    //     // }
-    //   })
-    // })
-  },
-
-=======
 import {storage} from '../../firebase'
 
 export default {
@@ -150,7 +75,6 @@ export default {
     this.mealsDb.length = 0
     this.mealsDb.push.apply(this.mealsDb, tempArr)
   }
->>>>>>> development
   
 }
 </script>
@@ -205,11 +129,6 @@ export default {
   left: 0;
   margin: auto;
   margin-top: 350px;
-<<<<<<< HEAD
-  
-  /* padding-top: 30px;  */
-=======
->>>>>>> development
 }
 
 .listStyle .clickedText{
@@ -230,11 +149,6 @@ export default {
   position: absolute; 
   font-size: 30px;
   justify-content: center;
-<<<<<<< HEAD
-  
-  /* padding-top: 30px;  */
-=======
->>>>>>> development
 }
 
 .listStyle img:hover{

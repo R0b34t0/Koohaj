@@ -2,11 +2,6 @@
     <div id="home">
         <div id="search">
             <input v-model="searchVal" type="text" id="searchBar" placeholder="Unesite jelo za pretragu">
-<<<<<<< HEAD
-            <button @click="setValue()" id="btnSearch"><img src="../assets/search.png" id="ikona"></button>
-        </div>
-        <Meals v-if="searched" :searchVal="searchValue" />
-=======
             <!-- probaj dodat lazy za v-model i vidi sto ce se dogodit -->
             <button @click="setValue(),loadDb()" id="btnSearch"><img src="../assets/search.png" id="ikona"></button>
         </div>
@@ -14,33 +9,11 @@
          <h2 v-if="this.loginButton" @click="prijava()" class="prijavaBtn">Prijava</h2>
         <Login v-if="this.clicked" v-on:loginSucc="loginSuccessful"/>
         
->>>>>>> development
     </div>
 </template>
 
 <script>
 import Meals from '../views/Meals'
-<<<<<<< HEAD
-
-export default {
-    components:{
-    Meals,
-  },
-    data() {
-        return {
-            searchValue:'', //dodana vrijednost da se mora stisnut search da se dobije org vr 
-            searchVal: '', // ovo je vrijednost u modelu
-            searched: false,
-            
-        }
-    },
-    methods: {
-        setValue: function() {
-            this.searchValue = this.searchVal
-            this.searched = true //otkriva search vrijednosti
-        }
-    },
-=======
 import {jela} from '../../firebase'
 import Login from '../views/Login'
 
@@ -98,7 +71,6 @@ export default {
         }
     },
     
->>>>>>> development
 }
 </script>
 
@@ -112,16 +84,10 @@ export default {
         height: 20px;
         border: 1px solid #979797;
     }
-<<<<<<< HEAD
-    #btnSearch:focus{
-        /* outline: none; */
-    }
-=======
     /*  #btnSearch:focus{
          outline: none; 
     }
     */
->>>>>>> development
     #btnSearch {
         transform: translate(-30%,7%);
         border-radius: 0 10px 10px 0;
@@ -135,8 +101,6 @@ export default {
         display: flex;
         align-items: center;
     }
-<<<<<<< HEAD
-=======
     .prijavaBtn{
     color: #ffffff;
     position: absolute;
@@ -145,5 +109,4 @@ export default {
     left: 90%;
     right: 10%;
   }
->>>>>>> development
 </style>

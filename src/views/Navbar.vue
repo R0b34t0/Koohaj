@@ -5,10 +5,6 @@
     </div>
 </template>
 
-<<<<<<< HEAD
-
-=======
->>>>>>> development
 <style>
     #heading h1 {
         color: white;
