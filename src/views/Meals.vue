@@ -2,7 +2,7 @@
   <ul>
     <div class="listStyle" v-if="this.searchVal">
       <!-- potencijalno se moze izbaciti searchval -->
-      <!-- v-on="checkValues()" -->
+      
       <li v-for="(test,index) in this.mealsDb" :key="test[0]">
         <div v-on="getImage(test[1].imeSlike)"> 
           <!-- v-if="checkValues(test[1])" -->
@@ -14,10 +14,6 @@
           {{recipe}}
           </div>
         </div>
-        <!-- <div v-for="value in test[1]" :key="value" >
-          {{value}}   
-          izbaceno trenutno, razmisljam da bude click da otkrije tekst
-        </div> -->
         </li>
     </div>
   </ul>
@@ -36,13 +32,6 @@ export default {
     data() {
     return {
       isClicked: false,
-      meals: [
-        ['pizza',["voda (150ml)", "secer (1 zlicica)", "kvasac (15g)", "passata (80g)", 
-                "mozzarella (70g)"],'https://www.themealdb.com/images/media/meals/x0lk931587671540.jpg'],
-        ['broccoli',['sol','papar','persin'],'https://www.themealdb.com/images/media/meals/tvvxpv1511191952.jpg'],
-        ['pizza1',['a','b','c'],'https://www.themealdb.com/images/media/meals/x0lk931587671540.jpg'],
-        ['pizza1',['a','b','c'],'https://www.themealdb.com/images/media/meals/x0lk931587671540.jpg'],
-      ],
       mealsDb: this.mealsDb, 
       // provjeriti ovu inicijalizaciju
       imgLink:'',
@@ -50,9 +39,6 @@ export default {
   },
   methods: {
     getImage: async function(imageName){
-      // this.isClicked = false
-      // Create a reference to the file we want to download
-      // console.log(imageName);
       var storageRef = storage.ref()
       var imageRef = storageRef.child(imageName+'.jpg');
     // Get the download URL
@@ -83,14 +69,11 @@ export default {
     }
   },
   beforeUpdate() {    
-    // console.log(this.mealsDb[1][1].includes(this.searchVal));
-    // console.log(this.mealsDb[0]);
     let tempArr = []
     tempArr = this.mealsDb.filter(value => value[1].imeJela.includes(this.searchVal))
-    // console.log(tempArr);
+
     this.mealsDb.length = 0
     this.mealsDb.push.apply(this.mealsDb, tempArr)
-    // console.log(value[1])
   }
   
 }
@@ -146,8 +129,6 @@ export default {
   left: 0;
   margin: auto;
   margin-top: 350px;
-  
-  /* padding-top: 30px;  */
 }
 
 .listStyle .clickedText{
@@ -168,8 +149,6 @@ export default {
   position: absolute; 
   font-size: 30px;
   justify-content: center;
-  
-  /* padding-top: 30px;  */
 }
 
 .listStyle img:hover{

@@ -1,7 +1,6 @@
 <template>
   <div class="unos">
     <input type="text" placeholder="Unesite jelo" v-model="imeJela"/>
-    <!-- <textarea placeholder="Unesite opis kuhanja"> -->
     <textarea placeholder="Unesite opis jela" v-model="opisKuhanja"></textarea>
     <div class="form-group" v-for="(input, k) in inputs" :key="input">
       <input

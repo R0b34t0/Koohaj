@@ -30,7 +30,6 @@ export default {
         
         prijava(){
         this.clicked = true;
-        console.log("prijava radi");
         },
         loginSuccessful(value){
             this.clicked = value;
@@ -43,15 +42,15 @@ export default {
         loadDb: function() {
         this.mealsDb = []
             jela.get().then((querySnapshot)=>{
-      querySnapshot.forEach((doc)=>{
-        
-        //   mozda moze i bolje. Ali ideja je da gore ispraznim array za svakih search, inace bi se duplalo za svaki pritisak searcha
-          this.mealsDb.push([
-            doc.id,
-            doc.data()])
-        // }
+                querySnapshot.forEach((doc)=>{
+                    
+                    //   mozda moze i bolje. Ali ideja je da gore ispraznim array za svakih search, inace bi se duplalo za svaki pritisak searcha
+                    this.mealsDb.push([
+                        doc.id,
+                        doc.data()])
+                    // }
 
-      })
+                })
       
         // console.log(this.mealsDb)
     })
@@ -66,8 +65,8 @@ export default {
             searched: false,
             isClicked: false,
             mealsDb:[], //vrijednost iz db 
-            clicked: false,
-            loginButton: true,
+            clicked: false, // prikazuje Login.vue
+            loginButton: true, // prikazuje Login.vue
             
         }
     },
