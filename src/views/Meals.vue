@@ -1,4 +1,5 @@
 <template>
+<<<<<<< HEAD
   
   <ul>
     <div class="listStyle" v-if="this.searchVal" >
@@ -16,6 +17,23 @@
           {{value}}   
           izbaceno trenutno, razmisljam da bude click da otkrije tekst
         </div> -->
+=======
+  <ul>
+    <div class="listStyle" v-if="this.searchVal">
+      <!-- potencijalno se moze izbaciti searchval -->
+      
+      <li v-for="(test,index) in this.mealsDb" :key="test[0]">
+        <div v-on="getImage(test[1].imeSlike)"> 
+          <!-- v-if="checkValues(test[1])" -->
+          <!--  -->
+        <p :class="[isClicked ? 'clickedTitle' : '']" >{{test[1].imeJela}}</p>
+        <img :class="[isClicked ? 'clicked' : '']" @click="openMeal(index)" :src="test[1].link" class="images" > 
+        <!-- imgLink -->
+        <div v-if="isClicked" :class="[isClicked ? 'clickedText' : '']" v-for="recipe in test[1].sastojci" :key="recipe">
+          {{recipe}}
+          </div>
+        </div>
+>>>>>>> development
         </li>
     </div>
   </ul>
@@ -23,6 +41,7 @@
 </template>
 
 <script>
+<<<<<<< HEAD
 import {jela} from '../../firebase'
 
 
@@ -76,6 +95,62 @@ export default {
     // })
   },
 
+=======
+import {storage} from '../../firebase'
+
+export default {
+    props: {
+      searchVal: String,
+      mealsDb: Array,
+      isClicked: Boolean,
+    },
+    data() {
+    return {
+      isClicked: false,
+      mealsDb: this.mealsDb, 
+      // provjeriti ovu inicijalizaciju
+      imgLink:'',
+    }
+  },
+  methods: {
+    getImage: async function(imageName){
+      var storageRef = storage.ref()
+      var imageRef = storageRef.child(imageName+'.jpg');
+    // Get the download URL
+      this.imgLink = await imageRef.getDownloadURL().catch((error)=>{
+        console.log(error);
+      })
+      
+      // console.log(this.imgLink);
+    },
+    openMeal: function(arrPosition) {
+      let tempVar = this.mealsDb[arrPosition]
+      this.mealsDb.length = 0
+      this.mealsDb.push(tempVar)
+      this.toggleClass() // prebaceno iz poziva u buttonu
+    },
+    toggleClass: function() {
+      this.isClicked = true;
+    },
+    setTitle: function(className) {
+      // [isClicked ? 'clickedTitle' : '']
+      // if(this.isClicked) 
+    }
+    
+  },
+  watch: {
+    mealsDb: function(){
+      this.isClicked = false
+    }
+  },
+  beforeUpdate() {    
+    let tempArr = []
+    tempArr = this.mealsDb.filter(value => value[1].imeJela.includes(this.searchVal))
+
+    this.mealsDb.length = 0
+    this.mealsDb.push.apply(this.mealsDb, tempArr)
+  }
+>>>>>>> development
   
 }
 </script>
@@ -130,8 +205,11 @@ export default {
   left: 0;
   margin: auto;
   margin-top: 350px;
+<<<<<<< HEAD
   
   /* padding-top: 30px;  */
+=======
+>>>>>>> development
 }
 
 .listStyle .clickedText{
@@ -152,8 +230,11 @@ export default {
   position: absolute; 
   font-size: 30px;
   justify-content: center;
+<<<<<<< HEAD
   
   /* padding-top: 30px;  */
+=======
+>>>>>>> development
 }
 
 .listStyle img:hover{

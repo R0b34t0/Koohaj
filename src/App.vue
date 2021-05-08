@@ -7,6 +7,10 @@
   <div id="nav">
     <Navbar />
     <Home />
+<<<<<<< HEAD
+=======
+    <!-- <Unos /> -->
+>>>>>>> development
   </div>
 
 </template>
@@ -16,11 +20,19 @@
 
 import Navbar from './views/Navbar'
 import Home from './components/Home'
+<<<<<<< HEAD
+=======
+import Unos from './components/Unos'
+>>>>>>> development
 
 export default {
     components:{
     Navbar,
     Home,
+<<<<<<< HEAD
+=======
+    Unos,// izbrisat 
+>>>>>>> development
   },
     
 }
