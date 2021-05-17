@@ -5,29 +5,61 @@
             <!-- probaj dodat lazy za v-model i vidi sto ce se dogodit -->
             <button @click="setValue(),loadDb()" id="btnSearch"><img src="../assets/search.png" id="ikona"></button>
         </div>
-        <Meals v-if="searched" :searchVal="searchValue" :mealsDb="mealsDb" :isClicked="false"/>
+        <Meals v-if="searched" :searchVal="searchValue" :mealsDb="mealsDb" :randomVal="randomVal" :isClicked="false"/>
          <h2 v-if="this.loginButton" @click="prijava()" class="prijavaBtn">Prijava</h2>
         <Login v-if="this.clicked" v-on:loginSucc="loginSuccessful"/>
+        <button @click="random()" class="btnRandom">Random</button>
+
+        <p id="ispis"></p>
         
     </div>
 </template>
 
 <script>
 import Meals from '../views/Meals'
-import {jela} from '../../firebase'
+import {db,jela} from '../../firebase'
 import Login from '../views/Login'
+
+
 
 
 export default {
     //name: 'Home',
+
     components: {
         Meals,
         Login,
-  },
-  
+    },
+
 
     methods: {
-        
+  
+        random(){
+            this.mealsDb = [];
+            this.mealsDb.length = 0;
+            jela.get().then(snap=>{
+                // console.log(snap.data);
+                let randomIndex = Math.floor(Math.random()*snap.size)
+                // console.log(randomIndex);
+                
+                snap.docs.map((doc,index)=>{
+                    // console.log(doc,index);
+                    if(index===randomIndex){
+                        // console.log(doc.data());
+                        this.mealsDb.push([doc.id, doc.data()])
+                        this.searched = true;
+                        this.searchValue = doc.data().imeJela;
+                        this.randomVal=true;
+  
+                    }
+                })
+            })
+
+                        
+                        },
+          
+   
+
         prijava(){
         this.clicked = true;
         },
@@ -38,6 +70,7 @@ export default {
         setValue: function() {
             this.searchValue = this.searchVal
             this.searched = true //otkriva search vrijednosti
+            this.randomVal = false; // u slucaju da netko stisne random pa trazi
         },
         loadDb: function() {
         this.mealsDb = []
@@ -67,7 +100,7 @@ export default {
             mealsDb:[], //vrijednost iz db 
             clicked: false, // prikazuje Login.vue
             loginButton: true, // prikazuje Login.vue
-            
+            randomVal: false, //testiranje ako ce raditi za random
         }
     },
     
@@ -108,5 +141,14 @@ export default {
     cursor: pointer;
     left: 90%;
     right: 10%;
-  }
+    }
+
+    .btnRandom{
+    position: absolute;
+    top: 90px;
+    cursor: pointer;
+    left: 70%;
+    right: 30%;
+    }
+  
 </style>

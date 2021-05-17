@@ -9,6 +9,8 @@ import 'firebase/firestore'
 // firebase init - add your own config here
 const firebaseConfig = {
   // API PODACI
+ 
+  
 }
 firebase.initializeApp(firebaseConfig)
 

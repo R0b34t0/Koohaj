@@ -2,15 +2,15 @@
   <ul>
     <div class="listStyle" v-if="this.searchVal">
       <!-- potencijalno se moze izbaciti searchval -->
-      
       <li v-for="(test,index) in this.mealsDb" :key="test[0]">
+        
         <div v-on="getImage(test[1].imeSlike)"> 
           <!-- v-if="checkValues(test[1])" -->
           <!--  -->
         <p :class="[isClicked ? 'clickedTitle' : '']" >{{test[1].imeJela}}</p>
         <img :class="[isClicked ? 'clicked' : '']" @click="openMeal(index)" :src="test[1].link" class="images" > 
         <!-- imgLink -->
-        <div v-if="isClicked" :class="[isClicked ? 'clickedText' : '']" v-for="recipe in test[1].sastojci" :key="recipe">
+        <div if="isClicked" :class="[isClicked ? 'clickedText' : '']" v-for="recipe in test[1].sastojci" :key="recipe">
           {{recipe}}
           </div>
         </div>
@@ -28,6 +28,7 @@ export default {
       searchVal: String,
       mealsDb: Array,
       isClicked: Boolean,
+      randomVal: Boolean,
     },
     data() {
     return {
@@ -39,6 +40,9 @@ export default {
   },
   methods: {
     getImage: async function(imageName){
+      // console.log(this.randomVal);
+      (this.randomVal === true) ? this.isClicked = this.randomVal : ''
+
       var storageRef = storage.ref()
       var imageRef = storageRef.child(imageName+'.jpg');
     // Get the download URL
@@ -68,14 +72,14 @@ export default {
       this.isClicked = false
     }
   },
-  beforeUpdate() {    
+  beforeUpdate() {   
+    // console.log(this.mealsDb);
     let tempArr = []
     tempArr = this.mealsDb.filter(value => value[1].imeJela.includes(this.searchVal))
 
     this.mealsDb.length = 0
     this.mealsDb.push.apply(this.mealsDb, tempArr)
-  }
-  
+  } 
 }
 </script>
 
