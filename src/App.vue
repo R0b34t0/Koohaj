@@ -6,8 +6,8 @@
   <router-view/> -->
   <div id="nav">
     <Navbar />
-    <Home />
-    <!--<Unos />--> 
+   <!-- <Home />-->
+    <Unos /> 
   </div>
 
 </template>

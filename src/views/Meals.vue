@@ -91,7 +91,9 @@ export default {
 position: absolute;
 top: 0px;
 right: 0px;
-width: 250px;
+width: 400px;
+border-style: solid;
+text-justify: auto;
 
 }
 

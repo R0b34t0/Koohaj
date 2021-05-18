@@ -1,8 +1,11 @@
 <template>
   <div class="unos">
-    <input type="text" placeholder="Unesite jelo" v-model="imeJela"/>
+    <input type="text" placeholder="Unesite naziv jela" v-model="imeJela"/>
+    <br>
     <textarea placeholder="Unesite opis jela" v-model="opisKuhanja"></textarea>
+    <br>
     <div class="form-group" v-for="(input, k) in inputs" :key="input">
+      <br>
       <input
         type="text"
         placeholder="Unesite sastojak"
@@ -12,11 +15,12 @@
       
       <span>
         <button @click="remove(k)" v-show="k || (!k && inputs.length > 1)">
-          makni
+          -
         </button>
-        <button @click="add(k)" v-show="k == inputs.length - 1">dodaj</button>
+        <button @click="add(k)" v-show="k == inputs.length - 1">+</button>
       </span>
     </div>
+    <br>
     <label for="file">Unesite fotografiju jela:</label>
     <input @change="loadVal" type="file" id="file" ref="myFiles"/>
     <button @click="uploadData">Upload</button>
