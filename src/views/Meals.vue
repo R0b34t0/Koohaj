@@ -13,6 +13,9 @@
         <div if="isClicked" :class="[isClicked ? 'clickedText' : '']" v-for="recipe in test[1].sastojci" :key="recipe">
           {{recipe}}
           </div>
+          <p class="opisKuhanja" v-if="isClicked"> 
+            {{test[1].opisKuhanja}}
+            </p>
         </div>
         </li>
     </div>
@@ -83,6 +86,13 @@ export default {
 </script>
 
 <style>
+
+.opisKuhanja{
+position: absolute;
+top: 0px;
+right: 0px;
+
+}
 
 .listStyle {
   position: relative;

@@ -97,11 +97,14 @@ export default {
 
 <style>
 .unos {
+  margin-top: 150px;
   display: flex;
   flex-direction: column;
   width: 173px;
   justify-content: center;
   align-items: center;
   align-self: center;
+  margin-left: auto;
+  margin-right: auto;
 }
 </style>

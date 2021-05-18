@@ -6,8 +6,8 @@
   <router-view/> -->
   <div id="nav">
     <Navbar />
-    <Home />
-    <!-- <Unos /> -->
+   <!-- <Home / -->>
+    <Unos /> 
   </div>
 
 </template>
@@ -23,7 +23,7 @@ export default {
     components:{
     Navbar,
     Home,
-    Unos,// izbrisat 
+    Unos, 
   },
     
 }
