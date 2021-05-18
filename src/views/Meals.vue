@@ -41,8 +41,7 @@ export default {
   methods: {
     getImage: async function(imageName){
       // console.log(this.randomVal);
-      (this.randomVal === true) ? this.isClicked = this.randomVal : ''
-
+      (this.randomVal === true) ? this.isClicked = this.randomVal : '' 
       var storageRef = storage.ref()
       var imageRef = storageRef.child(imageName+'.jpg');
     // Get the download URL
