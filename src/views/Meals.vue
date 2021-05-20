@@ -1,18 +1,21 @@
 <template>
   <ul>
     <div class="listStyle" v-if="this.searchVal">
-      <!-- potencijalno se moze izbaciti searchval -->
-      
-      <li v-for="(test,index) in this.mealsDb" :key="test[0]">
-        <div v-on="getImage(test[1].imeSlike)"> 
-          <!-- v-if="checkValues(test[1])" -->
-          <!--  -->
-        <p :class="[isClicked ? 'clickedTitle' : '']" >{{test[1].imeJela}}</p>
-        <img :class="[isClicked ? 'clicked' : '']" @click="openMeal(index)" :src="test[1].link" class="images" > 
+      <li v-for="(jelo,index) in this.mealsDb" :key="jelo[0]">
+        
+        <div v-on="getImage(jelo[1].imeSlike)"> 
+       
+        <p :class="[isClicked ? 'clickedTitle' : '']" >{{jelo[1].imeJela}}</p>
+        <img :class="[isClicked ? 'clicked' : '']" @click="openMeal(index)" :src="jelo[1].link" class="images" > 
         <!-- imgLink -->
-        <div v-if="isClicked" :class="[isClicked ? 'clickedText' : '']" v-for="recipe in test[1].sastojci" :key="recipe">
-          {{recipe}}
+        <div :class="[isClicked ? 'clickedText' : '']" v-for="recipe in jelo[1].sastojci" :key="recipe">
+          <div v-if="isClicked">
+            {{recipe}}
+            </div>
           </div>
+          <p class="opisKuhanja" v-if="isClicked"> 
+            {{jelo[1].opisKuhanja}}
+            </p>
         </div>
         </li>
     </div>
@@ -27,26 +30,26 @@ export default {
     props: {
       searchVal: String,
       mealsDb: Array,
-      isClicked: Boolean,
+      // isClicked: Boolean,
+      randomVal: Boolean,
     },
     data() {
     return {
       isClicked: false,
-      mealsDb: this.mealsDb, 
-      // provjeriti ovu inicijalizaciju
+      // mealsDb: this.mealsDb, 
       imgLink:'',
     }
   },
   methods: {
     getImage: async function(imageName){
+      (this.randomVal === true) ? this.isClicked = this.randomVal : '' 
       var storageRef = storage.ref()
       var imageRef = storageRef.child(imageName+'.jpg');
-    // Get the download URL
+        // Get the download URL
       this.imgLink = await imageRef.getDownloadURL().catch((error)=>{
         console.log(error);
       })
       
-      // console.log(this.imgLink);
     },
     openMeal: function(arrPosition) {
       let tempVar = this.mealsDb[arrPosition]
@@ -56,10 +59,6 @@ export default {
     },
     toggleClass: function() {
       this.isClicked = true;
-    },
-    setTitle: function(className) {
-      // [isClicked ? 'clickedTitle' : '']
-      // if(this.isClicked) 
     }
     
   },
@@ -68,19 +67,25 @@ export default {
       this.isClicked = false
     }
   },
-  beforeUpdate() {    
-    let tempArr = []
-    tempArr = this.mealsDb.filter(value => value[1].imeJela.includes(this.searchVal))
+  beforeUpdate() {   
+    let tempArr = [];
+    tempArr = this.mealsDb.filter(value => value[1].imeJela.toLowerCase().startsWith(this.searchVal))
 
     this.mealsDb.length = 0
     this.mealsDb.push.apply(this.mealsDb, tempArr)
-  }
-  
+  } 
 }
 </script>
 
 <style>
 
+.opisKuhanja, .opisKuhanja p{
+position: absolute;
+top: 0px;
+right: 0px;
+width: 400px;
+border-style: solid;
+}
 .listStyle {
   position: relative;
   list-style-type: none; 
@@ -120,6 +125,7 @@ export default {
 }
 
 .listStyle .clickedTitle{
+  opacity: 1;
   z-index: 2;
   position: absolute; 
   font-size: 40px;
@@ -145,10 +151,14 @@ export default {
 
 .listStyle p {
   z-index: -1;
-  /* -1 */
-  position: absolute; 
+  width: 300px;
   font-size: 30px;
-  justify-content: center;
+  position: absolute; 
+  top: 0;
+  display: flex;
+  margin-left: auto;
+  margin-right: auto;
+  
 }
 
 .listStyle img:hover{

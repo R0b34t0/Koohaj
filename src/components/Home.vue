@@ -2,20 +2,31 @@
     <div id="home">
         <div id="search">
             <input v-model="searchVal" type="text" id="searchBar" placeholder="Unesite jelo za pretragu">
-            <!-- probaj dodat lazy za v-model i vidi sto ce se dogodit -->
             <button @click="setValue(),loadDb()" id="btnSearch"><img src="../assets/search.png" id="ikona"></button>
+            <!-- Random button -->
+            <button @click="random()" class="btnRandom" id="btnRandom">
+            <img src="../assets/random.svg"> 
+            
+        </button>
         </div>
-        <Meals v-if="searched" :searchVal="searchValue" :mealsDb="mealsDb" :isClicked="false"/>
+        <Meals v-if="searched" :searchVal="searchValue" :mealsDb="mealsDb" :randomVal="randomVal" :isClicked="false"/>
          <h2 v-if="this.loginButton" @click="prijava()" class="prijavaBtn">Prijava</h2>
+         <h2 v-if="!this.loginButton" @click="odjava()" class="prijavaBtn">Odjava</h2>
+         <h2 v-if="this.unosButton" @click="this.$router.push('/unos')" class="unosBtn">Unos</h2>
         <Login v-if="this.clicked" v-on:loginSucc="loginSuccessful"/>
+        
+
+        <p id="ispis"></p>
         
     </div>
 </template>
 
 <script>
 import Meals from '../views/Meals'
-import {jela} from '../../firebase'
+import {auth, db,jela} from '../../firebase'
 import Login from '../views/Login'
+
+
 
 
 export default {
@@ -23,21 +34,48 @@ export default {
     components: {
         Meals,
         Login,
-  },
-  
+    },
+
 
     methods: {
-        
+  
+        random(){
+            this.searchVal = '';
+            this.mealsDb.length = 0;
+            jela.get().then(snap=>{
+                let randomIndex = Math.floor(Math.random()*snap.size)
+                
+                snap.docs.map((doc,index)=>{
+                    if(index===randomIndex){
+                        this.mealsDb.push([doc.id, doc.data()])
+                        this.searched = true;
+                        this.searchValue = doc.data().imeJela.toLowerCase();
+                        this.randomVal=true;
+  
+                    }
+                })
+            })
+        },
+          
+   
+
         prijava(){
         this.clicked = true;
+        },
+        odjava(){
+            auth.signOut();
+            this.clicked = false;
+            this.loginButton = true;
+            alert('Odjavljeni ste')
         },
         loginSuccessful(value){
             this.clicked = value;
             this.loginButton = false;
         },
         setValue: function() {
-            this.searchValue = this.searchVal
+            this.searchValue = this.searchVal.toLowerCase();
             this.searched = true //otkriva search vrijednosti
+            this.randomVal = false; // u slucaju da netko stisne random pa trazi
         },
         loadDb: function() {
         this.mealsDb = []
@@ -52,7 +90,7 @@ export default {
 
                 })
       
-        // console.log(this.mealsDb)
+      
     })
         },
      
@@ -67,7 +105,19 @@ export default {
             mealsDb:[], //vrijednost iz db 
             clicked: false, // prikazuje Login.vue
             loginButton: true, // prikazuje Login.vue
-            
+            unosButton: false, // prikazuje Unos.vue
+            randomVal: false, //testiranje ako ce raditi za random
+        }
+    },
+    beforeMount() {
+        // loginButton 
+        if(auth.currentUser) {
+            this.loginButton = false;
+            this.unosButton = true;
+        }
+        else {
+            this.loginButton = true;
+            this.unosButton = false;   
         }
     },
     
@@ -75,6 +125,9 @@ export default {
 </script>
 
 <style>
+    button{
+        cursor: pointer;
+    }
     #home{
         margin-top: 50px;
     }
@@ -84,10 +137,7 @@ export default {
         height: 20px;
         border: 1px solid #979797;
     }
-    /*  #btnSearch:focus{
-         outline: none; 
-    }
-    */
+    
     #btnSearch {
         transform: translate(-30%,7%);
         border-radius: 0 10px 10px 0;
@@ -96,10 +146,16 @@ export default {
         top: 86px;
     }
     #ikona{
-        height:20px;
-        /* ovo nije finalno, moramo naci bolji nacin za ikonu */
+        height:20px;        
         display: flex;
         align-items: center;
+    }
+    #btnRandom{
+        height:25px;
+        width:40px;        
+        display: flex;
+        align-items: center;
+        top: 87px;
     }
     .prijavaBtn{
     color: #ffffff;
@@ -108,5 +164,18 @@ export default {
     cursor: pointer;
     left: 90%;
     right: 10%;
-  }
+    }
+
+    .btnRandom{
+    position: absolute;
+    top: 90px;
+    left: 70%;
+    right: 30%;
+    }
+    .unosBtn{
+        cursor: pointer;
+        color: #ffffff;
+        position: absolute;
+        top: 0;
+    }
 </style>

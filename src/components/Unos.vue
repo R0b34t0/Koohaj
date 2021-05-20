@@ -1,8 +1,12 @@
 <template>
   <div class="unos">
-    <input type="text" placeholder="Unesite jelo" v-model="imeJela"/>
+    <h1>Unos jela</h1>
+    <input type="text" placeholder="Unesite naziv jela" v-model="imeJela"/>
+    <br>
     <textarea placeholder="Unesite opis jela" v-model="opisKuhanja"></textarea>
+    <br>
     <div class="form-group" v-for="(input, k) in inputs" :key="input">
+      <br>
       <input
         type="text"
         placeholder="Unesite sastojak"
@@ -12,14 +16,15 @@
       
       <span>
         <button @click="remove(k)" v-show="k || (!k && inputs.length > 1)">
-          makni
+          -
         </button>
-        <button @click="add(k)" v-show="k == inputs.length - 1">dodaj</button>
+        <button @click="add(k)" v-show="k == inputs.length - 1">+</button>
       </span>
     </div>
+    <br>
     <label for="file">Unesite fotografiju jela:</label>
     <input @change="loadVal" type="file" id="file" ref="myFiles"/>
-    <button @click="uploadData">Upload</button>
+    <button @click="uploadData">Unesi jelo</button>
   </div>
 </template>
 
@@ -60,7 +65,6 @@ export default {
         }, 
         () => {
             uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
-            console.log('File available at', downloadURL)
             this.URL = downloadURL
             // dodan update za jelo ovdje, lakse mi je ovdje updateati nego cekati
             // update u parent funkciji
@@ -77,15 +81,17 @@ export default {
   },
 
   uploadData(){
-      
-      jela.add({
-          imeJela: this.imeJela,
-          opisKuhanja: this.opisKuhanja,
-          sastojci: this.sastojci,
-      }).then((docRef)=>{
-        this.loadImg(docRef.id)
-
-      })
+      if(this.files.name && this.imeJela && this.opisKuhanja && (this.sastojci.length>0 && this.sastojci[0]!=="")) {
+        jela.add({
+            imeJela: this.imeJela,
+            opisKuhanja: this.opisKuhanja,
+            sastojci: this.sastojci,
+        }).then((docRef)=>{
+          this.loadImg(docRef.id)
+          alert('Podaci su spremljeni')
+        })
+      }
+      else alert('Unesite sve potrebne podatke')
 
   }
      
@@ -97,11 +103,14 @@ export default {
 
 <style>
 .unos {
+  margin-top: 50px;
   display: flex;
   flex-direction: column;
   width: 173px;
   justify-content: center;
   align-items: center;
   align-self: center;
+  margin-left: auto;
+  margin-right: auto;
 }
 </style>
