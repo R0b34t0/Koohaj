@@ -1,5 +1,6 @@
 <template>
   <div class="unos">
+    <h1>Unos jela</h1>
     <input type="text" placeholder="Unesite naziv jela" v-model="imeJela"/>
     <br>
     <textarea placeholder="Unesite opis jela" v-model="opisKuhanja"></textarea>
@@ -23,7 +24,7 @@
     <br>
     <label for="file">Unesite fotografiju jela:</label>
     <input @change="loadVal" type="file" id="file" ref="myFiles"/>
-    <button @click="uploadData">Upload</button>
+    <button @click="uploadData">Unesi jelo</button>
   </div>
 </template>
 
@@ -64,7 +65,6 @@ export default {
         }, 
         () => {
             uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
-            console.log('File available at', downloadURL)
             this.URL = downloadURL
             // dodan update za jelo ovdje, lakse mi je ovdje updateati nego cekati
             // update u parent funkciji
@@ -81,15 +81,17 @@ export default {
   },
 
   uploadData(){
-      
-      jela.add({
-          imeJela: this.imeJela,
-          opisKuhanja: this.opisKuhanja,
-          sastojci: this.sastojci,
-      }).then((docRef)=>{
-        this.loadImg(docRef.id)
-
-      })
+      if(this.files.name && this.imeJela && this.opisKuhanja && (this.sastojci.length>0 && this.sastojci[0]!=="")) {
+        jela.add({
+            imeJela: this.imeJela,
+            opisKuhanja: this.opisKuhanja,
+            sastojci: this.sastojci,
+        }).then((docRef)=>{
+          this.loadImg(docRef.id)
+          alert('Podaci su spremljeni')
+        })
+      }
+      else alert('Unesite sve potrebne podatke')
 
   }
      
@@ -101,7 +103,7 @@ export default {
 
 <style>
 .unos {
-  margin-top: 150px;
+  margin-top: 50px;
   display: flex;
   flex-direction: column;
   width: 173px;

@@ -24,15 +24,13 @@ export default {
     methods: {
 
         login() {
-            //console.log(this.mail,this.password);
             if(this.mail.trim() !== '' && this.password.trim() !==''){
                 auth.signInWithEmailAndPassword(this.mail, this.password)
                     .then((userCredential) => {
                         // Signed in
                         var user = userCredential.user;
-                        // ...
                         this.$emit('loginSucc', false);
-
+                        this.$router.push('/unos');
                         
                     })
                     .catch((error) => {

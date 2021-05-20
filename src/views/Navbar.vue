@@ -1,10 +1,18 @@
 <template>
-    <div id="heading">
+    <div id="heading" @click="navigateHome()">
         <h1>Koohaj!</h1>
         <img src="../assets/logo.png" class="logo">
     </div>
 </template>
-
+<script>
+export default {
+    methods: {
+        navigateHome() {
+            this.$router.push('/')
+        }
+    },
+}
+</script>
 <style>
     #heading h1 {
         color: white;
@@ -14,6 +22,7 @@
         padding: 5px;
     }
     #heading{
+        cursor: pointer;
         position: absolute;
         background-color: #794614;
         width:100%;
