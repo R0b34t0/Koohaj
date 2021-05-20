@@ -30,7 +30,6 @@ export default {
                         // Signed in
                         var user = userCredential.user;
                         this.$emit('loginSucc', false);
-                        this.$router.push('/unos');
                         
                     })
                     .catch((error) => {

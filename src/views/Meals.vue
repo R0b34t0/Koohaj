@@ -29,14 +29,14 @@ import {storage} from '../../firebase'
 export default {
     props: {
       searchVal: String,
-      // mealsDb: Array,
-      isClicked: Boolean,
+      mealsDb: Array,
+      // isClicked: Boolean,
       randomVal: Boolean,
     },
     data() {
     return {
       isClicked: false,
-      mealsDb: this.mealsDb, 
+      // mealsDb: this.mealsDb, 
       imgLink:'',
     }
   },
@@ -68,7 +68,7 @@ export default {
     }
   },
   beforeUpdate() {   
-    let tempArr = []
+    let tempArr = [];
     tempArr = this.mealsDb.filter(value => value[1].imeJela.toLowerCase().startsWith(this.searchVal))
 
     this.mealsDb.length = 0
