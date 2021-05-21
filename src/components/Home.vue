@@ -66,11 +66,13 @@ export default {
             auth.signOut();
             this.clicked = false;
             this.loginButton = true;
+            this.unosButton = false;
             alert('Odjavljeni ste')
         },
         loginSuccessful(value){
             this.clicked = value;
             this.loginButton = false;
+            this.unosButton = true;
         },
         setValue: function() {
             this.searchValue = this.searchVal.toLowerCase();
