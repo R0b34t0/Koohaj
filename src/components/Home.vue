@@ -10,10 +10,7 @@
         </button>
         </div>
         <Meals v-if="searched" :searchVal="searchValue" :mealsDb="mealsDb" :randomVal="randomVal" :isClicked="false"/>
-         <h2 v-if="this.loginButton" @click="prijava()" class="prijavaBtn">Prijava</h2>
-         <h2 v-if="!this.loginButton" @click="odjava()" class="prijavaBtn">Odjava</h2>
-         <h2 v-if="this.unosButton" @click="this.$router.push('/unos')" class="unosBtn">Unos</h2>
-        <Login v-if="this.clicked" v-on:loginSucc="loginSuccessful"/>
+         
         
 
         <p id="ispis"></p>
@@ -23,8 +20,7 @@
 
 <script>
 import Meals from '../views/Meals'
-import {auth, db,jela} from '../../firebase'
-import Login from '../views/Login'
+import {jela} from '../../firebase'
 
 
 
@@ -33,12 +29,10 @@ export default {
     //name: 'Home',
     components: {
         Meals,
-        Login,
     },
 
 
     methods: {
-  
         random(){
             this.searchVal = '';
             this.mealsDb.length = 0;
@@ -59,21 +53,6 @@ export default {
           
    
 
-        prijava(){
-        this.clicked = true;
-        },
-        odjava(){
-            auth.signOut();
-            this.clicked = false;
-            this.loginButton = true;
-            this.unosButton = false;
-            alert('Odjavljeni ste')
-        },
-        loginSuccessful(value){
-            this.clicked = value;
-            this.loginButton = false;
-            this.unosButton = true;
-        },
         setValue: function() {
             this.searchValue = this.searchVal.toLowerCase();
             this.searched = true //otkriva search vrijednosti
@@ -91,12 +70,8 @@ export default {
                     // }
 
                 })
-      
-      
     })
         },
-     
-        
     },
         data() {
         return {
@@ -105,23 +80,10 @@ export default {
             searched: false,
             isClicked: false,
             mealsDb:[], //vrijednost iz db 
-            clicked: false, // prikazuje Login.vue
-            loginButton: true, // prikazuje Login.vue
-            unosButton: false, // prikazuje Unos.vue
             randomVal: false, //testiranje ako ce raditi za random
         }
     },
-    beforeMount() {
-        // loginButton 
-        if(auth.currentUser) {
-            this.loginButton = false;
-            this.unosButton = true;
-        }
-        else {
-            this.loginButton = true;
-            this.unosButton = false;   
-        }
-    },
+    
     
 }
 </script>
@@ -159,14 +121,7 @@ export default {
         align-items: center;
         top: 87px;
     }
-    .prijavaBtn{
-    color: #ffffff;
-    position: absolute;
-    top: 0;
-    cursor: pointer;
-    left: 90%;
-    right: 10%;
-    }
+    
 
     .btnRandom{
     position: absolute;

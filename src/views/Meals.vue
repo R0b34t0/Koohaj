@@ -7,7 +7,6 @@
        
         <p :class="[isClicked ? 'clickedTitle' : '']" >{{jelo[1].imeJela}}</p>
         <img :class="[isClicked ? 'clicked' : '']" @click="openMeal(index)" :src="jelo[1].link" class="images" > 
-        <!-- imgLink -->
         <div :class="[isClicked ? 'clickedText' : '']" v-for="recipe in jelo[1].sastojci" :key="recipe">
           <div v-if="isClicked">
             {{recipe}}
@@ -30,13 +29,11 @@ export default {
     props: {
       searchVal: String,
       mealsDb: Array,
-      // isClicked: Boolean,
       randomVal: Boolean,
     },
     data() {
     return {
       isClicked: false,
-      // mealsDb: this.mealsDb, 
       imgLink:'',
     }
   },

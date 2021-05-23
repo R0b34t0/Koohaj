@@ -1,9 +1,12 @@
 <template>
+<div class="loginWindow">
     <div class="loginForm"> 
         <input v-model="mail" type="email" placeholder="Unesite e-mail">
         <input v-model="password" type="password" placeholder="Unesite lozinku">
         <button @click="login()">Prijava</button>
     </div>
+
+</div>
 </template>
 
 <script>
@@ -48,6 +51,15 @@ export default {
 </script>
 
 <style>
+    .loginWindow {
+        z-index: 2;
+        position: absolute;
+        width: 100vw;
+        height: 100vw;
+        top: 70px;
+        background: #794614;
+    }
+
     .loginForm{
         margin-top: 150px;
         display: flex;
