@@ -1,5 +1,6 @@
 <template>
   <div class="unos">
+    <h1 @click="this.$router.push('/pregledUnosa')" class="pregledUnosa">Pregled svih unosa</h1>
     <h1>Unos jela</h1>
     <input type="text" placeholder="Unesite naziv jela" v-model="imeJela"/>
     <br>
@@ -29,13 +30,11 @@
 </template>
 
 <script>
-import {jela} from "../../firebase";
-import {storage} from "../../firebase";
+import {jela,storage,auth} from "../../firebase";
 
 export default {
   data() {
     return {
-        fileOrg:'',
         imeJela:'',
         opisKuhanja:'',
       files: [],
@@ -74,6 +73,7 @@ export default {
             })
 
             });
+            
         }
         );
 
@@ -86,9 +86,13 @@ export default {
             imeJela: this.imeJela,
             opisKuhanja: this.opisKuhanja,
             sastojci: this.sastojci,
+            korisnik: auth.currentUser.uid,
         }).then((docRef)=>{
           this.loadImg(docRef.id)
           alert('Podaci su spremljeni')
+          this.imeJela='';
+            this.opisKuhanja='';
+            this.sastojci='';
         })
       }
       else alert('Unesite sve potrebne podatke')
@@ -112,5 +116,11 @@ export default {
   align-self: center;
   margin-left: auto;
   margin-right: auto;
+}
+
+.pregledUnosa{
+  width: 300px;
+  border: 3px solid black;
+  cursor: pointer;
 }
 </style>

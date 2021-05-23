@@ -1,7 +1,9 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
-import App from '../App'
 import Unos from '../components/Unos'
 import Home from '../components/Home'
+import PregledUnosa from '../views/PregledUnosa'
+
+
 import {auth} from '../../firebase'
 const routes = [
   {
@@ -13,6 +15,14 @@ const routes = [
     path: '/unos',
     name: 'Unos',
     component: Unos,
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
+    path: '/pregledUnosa',
+    name: 'PregledUnosa',
+    component: PregledUnosa,
     meta: {
       requiresAuth: true
     }
