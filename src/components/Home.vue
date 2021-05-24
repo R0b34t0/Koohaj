@@ -4,7 +4,7 @@
             <input v-model="searchVal" type="text" id="searchBar" placeholder="Unesite jelo za pretragu">
             <button @click="setValue(),loadDb()" id="btnSearch"><img src="../assets/search.png" id="ikona"></button>
             <!-- Random button -->
-            <button @click="random()" class="btnRandom" id="btnRandom">
+            <button @click="random()" class="btnRandom">
             <img src="../assets/random.svg"> 
             
         </button>
@@ -114,21 +114,19 @@ export default {
         display: flex;
         align-items: center;
     }
-    #btnRandom{
+
+    .btnRandom{
         height:25px;
         width:40px;        
         display: flex;
         align-items: center;
+        position: absolute;
         top: 87px;
+        left: 70%;
+        right: 30%;
     }
     
 
-    .btnRandom{
-    position: absolute;
-    top: 90px;
-    left: 70%;
-    right: 30%;
-    }
     .unosBtn{
         cursor: pointer;
         color: #ffffff;

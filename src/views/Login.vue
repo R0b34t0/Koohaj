@@ -1,9 +1,20 @@
 <template>
-<div class="loginWindow">
-    <div class="loginForm"> 
+<div class="loginWindow" >
+    <div class="loginForm" v-if="!register"> 
         <input v-model="mail" type="email" placeholder="Unesite e-mail">
         <input v-model="password" type="password" placeholder="Unesite lozinku">
-        <button @click="login()">Prijava</button>
+        <button @click="login">Prijava</button>
+        <h4 @click="this.register=true">Niste korisnik? Registrirajte se!</h4>
+    </div>
+    <div class="loginForm" v-if="register">
+
+        <input v-model="mail" type="email" placeholder="Unesite e-mail">
+        <input v-model="password" type="password" placeholder="Unesite lozinku">
+        <input v-model="password2" type="password" placeholder="Potvrdite lozinku">
+        <br>
+        <button @click="registracija"> Registriraj se</button>
+        <h4 @click="this.register=false">Povratak na prijavu</h4>
+        
     </div>
 
 </div>
@@ -19,13 +30,14 @@ export default {
         return {
             mail:'',
             password:'',
+            password2:'',
+            register: false,
         }
     },
     props:{
         clicked:Boolean,
     },
     methods: {
-
         login() {
             if(this.mail.trim() !== '' && this.password.trim() !==''){
                 auth.signInWithEmailAndPassword(this.mail, this.password)
@@ -44,6 +56,28 @@ export default {
             else{
                 alert('Unesite e-mail ili lozinku')
             }
+        },
+        // 
+        registracija(){
+            if(this.mail.trim() !== '' && this.password.trim() !==''){
+                if(this.password===this.password2){
+                    if(this.password.length>5){
+                            auth.createUserWithEmailAndPassword(this.mail, this.password)
+                            .then((userCredential) => {
+                
+                            // Signed in 
+                                alert("Registrirani ste!")      
+                                this.login()  
+                            })
+                                .catch((error) => {
+                                var errorCode = error.code;
+                                var errorMessage = error.message;
+                            });
+                
+                    }else alert("Lozinka mora biti veca od 5 znakova");
+                }else alert("Lozinke se ne podudaraju!");
+            }else alert("Niste unijeli sve potrebne podatke");
+
         }
     },
 }
