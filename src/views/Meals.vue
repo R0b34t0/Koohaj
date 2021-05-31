@@ -80,7 +80,7 @@ export default {
 position: absolute;
 top: 0px;
 right: 0px;
-width: 400px;
+width: 200px;
 border-style: solid;
 }
 .listStyle {
@@ -90,7 +90,7 @@ border-style: solid;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-gap: 20px;
-  margin-top: 20px;
+  margin-top: 80px;
   z-index: 1;
 }
 
@@ -99,9 +99,9 @@ border-style: solid;
   padding-bottom: 50px;
    width: 100px; 
   height: 100px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .listStyle img{
@@ -125,21 +125,23 @@ border-style: solid;
   opacity: 1;
   z-index: 2;
   position: absolute; 
-  font-size: 40px;
+  font-size: 30px;
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
   margin: auto;
-  margin-top: 350px;
+  transform: translateY(-75px);
+  /* margin-top: 350px; */
 }
 
 .listStyle .clickedText{
   z-index: 2;
+  padding-left: 60px;
   /* position: absolute;  */
   font-size: 20px;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  /* grid-template-columns: repeat(4, 1fr); */
   grid-gap: 20px;
   margin-top: 20px;
 }
@@ -148,7 +150,7 @@ border-style: solid;
 
 .listStyle p {
   z-index: -1;
-  width: 300px;
+  width: 200px;
   font-size: 30px;
   position: absolute; 
   top: 0;
@@ -172,6 +174,14 @@ p:hover{
     grid-template-columns: repeat(3, 1fr);
   }
 
+  .listStyle .clicked{
+    margin-top: 30px;
+    width: 220px;
+  }
+
+.opisKuhanja, .opisKuhanja p{
+  /* width: 200px; */
+}
   
 }
 

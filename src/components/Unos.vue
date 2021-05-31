@@ -2,13 +2,14 @@
   <div class="unos">
     <h1 @click="this.$router.push('/pregledUnosa')" class="pregledUnosa">Pregled svih unosa</h1>
     <h1>Unos jela</h1>
-    <input type="text" placeholder="Unesite naziv jela" v-model="imeJela"/>
+    <input class="nazivJela" type="text" placeholder="Unesite naziv jela" v-model="imeJela"/>
     <br>
-    <textarea placeholder="Unesite opis jela" v-model="opisKuhanja"></textarea>
+    <textarea class="nazivOpis" placeholder="Unesite opis jela" v-model="opisKuhanja"></textarea>
     <br>
     <div class="form-group" v-for="(input, k) in inputs" :key="input">
       <br>
       <input
+        class="nazivSastojak"
         type="text"
         placeholder="Unesite sastojak"
         v-model="sastojci[k]"
@@ -25,7 +26,7 @@
     <br>
     <label for="file">Unesite fotografiju jela:</label>
     <input @change="loadVal" type="file" id="file" ref="myFiles"/>
-    <button @click="uploadData">Unesi jelo</button>
+    <button class="buttonUnos" @click="uploadData">Unesi jelo</button>
   </div>
 </template>
 

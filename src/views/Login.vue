@@ -3,16 +3,16 @@
     <div class="loginForm" v-if="!register"> 
         <input v-model="mail" type="email" placeholder="Unesite e-mail">
         <input v-model="password" type="password" placeholder="Unesite lozinku">
-        <button @click="login">Prijava</button>
+        <button class="loginBtn" @click="login">Prijava</button>
         <h4 @click="this.register=true">Niste korisnik? Registrirajte se!</h4>
     </div>
     <div class="loginForm" v-if="register">
 
         <input v-model="mail" type="email" placeholder="Unesite e-mail">
-        <input v-model="password" type="password" placeholder="Unesite lozinku">
-        <input v-model="password2" type="password" placeholder="Potvrdite lozinku">
+        <input class="lozinka1" v-model="password" type="password" placeholder="Unesite lozinku">
+        <input class="lozinka2" v-model="password2" type="password" placeholder="Potvrdite lozinku">
         <br>
-        <button @click="registracija"> Registriraj se</button>
+        <button class="registerBtn" @click="registracija"> Registriraj se</button>
         <h4 @click="this.register=false">Povratak na prijavu</h4>
         
     </div>
@@ -85,6 +85,9 @@ export default {
 </script>
 
 <style>
+    h4 {
+        color: white;
+    }
     .loginWindow {
         z-index: 2;
         position: absolute;
