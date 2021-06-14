@@ -32,10 +32,10 @@ export default {
             this.loginButton = false;
             this.unosButton = true;
         }
-        else {
-            this.loginButton = true;
-            this.unosButton = false;   
-        }
+            else {
+                this.loginButton = true;
+                this.unosButton = false;   
+            }
         },
         navigateHome() {
             this.$router.push('/')

@@ -1,13 +1,17 @@
 <template>
     <div>
         <h1 class="mainText">Popis unosa</h1>
-        <div v-for="jela in this.mealsDb" :key="jela[0]">
-            <div class="jela">
-                <p>{{jela[1].imeJela}}</p>
-                <p>{{jela[1].opisKuhanja}}</p>
-                <p class="deleteBtn" @click="izbrisi(jela[0])">Izbrisi</p>
-            </div>
-        </div>
+        <table class="jela">
+            <tr>
+                <th>Identifikator jela</th>
+                <th>Ime jela</th>
+            </tr>
+            <tr v-for="jela in this.mealsDb" :key="jela[0]">
+                <td>{{jela[0]}}</td>
+                <td>{{jela[1].imeJela}}</td>
+                <td class="deleteBtn" @click="izbrisi(jela[0])"><img src="../assets/trash.png"></td>
+            </tr>
+        </table>
     </div>
 </template>
 
@@ -65,15 +69,18 @@ export default {
         margin-top: 50px;
     }
     .jela{
-        display: grid;
-        grid-template-columns: 100px 100px 100px;
-        margin: 20px;
-        justify-content: center;
+        margin-left: auto;
+        margin-right: auto;
     }
-    .jela p{
+    table, th, td {
         border: 1px solid black;
+        border-collapse: collapse;
     }
-    .deleteBtn {
+
+    .deleteBtn{
         cursor: pointer;
+    }
+    .deleteBtn img {
+        width: 28px;
     }
 </style>

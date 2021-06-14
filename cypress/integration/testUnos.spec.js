@@ -26,8 +26,9 @@ describe('Testiranje funkcionalnosti unosa, pregleda unosa i brisanja', () => {
         cy.contains('Pregled svih unosa')
             .click()
 
-        cy.wait(500)
+        cy.wait(2500)
 
-        cy.contains('lazanje').get('.deleteBtn').click()
+        cy.get('table').contains('td', 'lazanje').get('.deleteBtn').click()
+
     })
 })

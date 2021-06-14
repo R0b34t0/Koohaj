@@ -1,28 +1,22 @@
 <template>
-  
   <div id="nav">
     <Navbar />
-  <router-view/>
+    <router-view />
   </div>
-
 </template>
 
 <script>
-// const firebase = require("firebase");
-
-import Navbar from './views/Navbar'
-import Home from './components/Home'
-import Unos from './components/Unos'
+import Navbar from "./views/Navbar";
+import Home from "./components/Home";
+import Unos from "./components/Unos";
 
 export default {
-    components:{
+  components: {
     Navbar,
     Home,
-    Unos, 
+    Unos,
   },
-    
-}
-
+};
 </script>
 
 <style>
@@ -37,6 +31,4 @@ export default {
 #nav {
   padding: 30px;
 }
-
-
 </style>
