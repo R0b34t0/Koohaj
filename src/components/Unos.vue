@@ -55,15 +55,19 @@ export default {
     };
   },
   methods: {
+    // dodavanje sastojka
     add(index) {
       this.inputs.push({});
     },
+    // micanje sastojka
     remove(index) {
       this.inputs.splice(index, 1);
     },
+    // ucitavanje datoteke
     loadVal() {
       this.files = event.target.files[0];
     },
+    // upload slike u bazu
     loadImg(imgName) {
       var uploadTask = storage
         .ref()
@@ -89,7 +93,7 @@ export default {
         }
       );
     },
-
+    // upload podataka u bazu
     uploadData() {
       if (
         this.files.name &&
@@ -106,6 +110,8 @@ export default {
             korisnik: auth.currentUser.uid,
           })
           .then((docRef) => {
+            // nakon sto su se podaci dodali zove se .then koji zove funkciju za dodavanje
+            // slike u bazu i onda se poniste varijable
             this.loadImg(docRef.id);
             alert("Podaci su spremljeni");
             this.imeJela = "";
